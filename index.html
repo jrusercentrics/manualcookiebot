@@ -46,13 +46,33 @@
 
 
     <script>
-    window.addEventListener("CookiebotOnDialogDisplay", function () {
-        const moreDetailsLink = document.getElementById("CybotCookiebotDialogBodyEdgeMoreDetailsLink");
-        if (moreDetailsLink) {
-            moreDetailsLink.setAttribute("role", "button");
-            moreDetailsLink.setAttribute("tabindex", "0");
-        }
-    });
+  function addAccessibilityAttributes() {
+    const maxAttempts = 50;
+    let attempts = 0;
+
+    const checkExist = setInterval(() => {
+      const moreDetailsLink = document.getElementById("CybotCookiebotDialogBodyEdgeMoreDetailsLink");
+
+      if (moreDetailsLink) {
+        moreDetailsLink.setAttribute("role", "button");
+        moreDetailsLink.setAttribute("tabindex", "0");
+        clearInterval(checkExist);
+        console.log("✔ Acessibilidade aplicada ao link 'Details zeigen'");
+      }
+
+      if (++attempts >= maxAttempts) {
+        clearInterval(checkExist);
+        console.warn("⚠ Não foi possível encontrar o link 'Details zeigen'");
+      }
+    }, 100);
+  }
+
+  // Quando o banner for exibido
+  window.addEventListener("CookiebotOnDialogDisplay", addAccessibilityAttributes);
+
+  // Fallback: tenta também após o carregamento da página
+  window.addEventListener("load", addAccessibilityAttributes);
 </script>
+
 </body>
 </html>
