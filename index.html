@@ -43,5 +43,16 @@
             });
         });
     </script>
+
+
+    <script>
+    window.addEventListener("CookiebotOnDialogDisplay", function () {
+        const moreDetailsLink = document.getElementById("CybotCookiebotDialogBodyEdgeMoreDetailsLink");
+        if (moreDetailsLink) {
+            moreDetailsLink.setAttribute("role", "button");
+            moreDetailsLink.setAttribute("tabindex", "0");
+        }
+    });
+</script>
 </body>
 </html>
